@@ -64,3 +64,69 @@ select:focus[data-flux-control] {
 /* \[:where(&)\]:size-4 {
     @apply size-4;
 } */
+
+.heading {
+    margin: 20px;
+}
+
+.heading h3 {
+    font-weight: bold;
+    font-size: 22pt;
+}
+
+.text {
+    margin: 20px;
+}
+
+.link {
+    color: #0a53be;
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.dashboard-chart-container {
+    min-height: 320px;
+    max-height: 320px;
+}
+
+.truncate-text {
+    max-width: 150px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+a:link {
+    color: #0000EE;
+    text-decoration: none;
+}
+
+a:visited {
+    color: #0000EE;
+}
+
+a:active {
+    color: #EE0000;
+}
+
+a:focus {
+    outline: none;
+}
+
+.bold {
+    font-weight: bold;
+}
+
+#record-modal {
+    width: 100%;
+}
+
+#record-modal tbody tr {
+    padding: 10px;
+    border: 1px solid grey;
+}
+
+#record-modal tbody tr td {
+    padding: 10px;
+    border: 1px solid grey;
+}
