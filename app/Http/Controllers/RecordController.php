@@ -19,7 +19,15 @@ class RecordController extends Controller
         return DataTables::of(Record::all())
             ->addIndexColumn()
             ->addColumn('action', function($row){
-                return '<button type="button" class="btn btn-info view-record" data-bs-toggle="modal" data-bs-target="#recordModal" data-id='.$row->id.'><i class="bi bi-search"></i></button>';
+                $buttons = '<div style="width: 130px;">';
+
+                $buttons .= '<button type="button" class="btn btn-info view-record" data-bs-toggle="modal" data-bs-target="#recordModal" data-id='.$row->id.'><i class="bi bi-search"></i></button>';
+                $buttons .= '<button type="button" class="btn btn-success edit-record" data-bs-toggle="modal" data-bs-target="#recordModal" data-id='.$row->id.'><i class="bi bi-pencil"></i></button>';
+                $buttons .= '<button type="button" class="btn btn-danger delete-record" data-id='.$row->id.'><i class="bi bi-trash"></i></button>';
+
+                $buttons .= '</div>';
+
+                return $buttons;
             })
             ->rawColumns(['action'])
             ->make(true);
@@ -35,5 +43,38 @@ class RecordController extends Controller
      */
     public function show(Request $request, int $id) {
         return Record::find($id)->toJSON();
+    }
+
+    /**
+     * Update a record and return success or failure
+     *
+     * @param Request $request
+     * @param int $id
+     *
+     * @return bool
+     */
+    public function edit(Request $request, int $id):bool {
+        $record = Record::find($id);
+
+        $record->string = 'Updated Post Title';
+        $record->text = 'This is the new content for the post.';
+        $record->json = '{}';
+        $record->boolean = 0;
+        $record->integer = 0;
+        $record->float = 0;
+
+        return $record->save();
+    }
+
+    /**
+     * Delete a record and return success or failure
+     *
+     * @param Request $request
+     * @param int $id
+     *
+     * @return bool
+     */
+    public function delete(Request $request, int $id):bool {
+        return (bool) Record::destroy($id);
     }
 }
