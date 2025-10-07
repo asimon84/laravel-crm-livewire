@@ -36,31 +36,47 @@
                         <tbody>
                         <tr>
                             <td class="bold">ID:</td>
-                            <td id="record-modal-id"></td>
+                            <td>
+                                <input type="text" id="record-modal-id" name="record-modal-id" disabled value=""/>
+                            </td>
                         </tr>
                         <tr>
                             <td class="bold">String:</td>
-                            <td id="record-modal-string"></td>
+                            <td>
+                                <input type="text" id="record-modal-string" name="record-modal-string" disabled value=""/>
+                            </td>
                         </tr>
                         <tr>
                             <td class="bold">Text:</td>
-                            <td id="record-modal-text"></td>
+                            <td>
+                                <textarea type="text" id="record-modal-text" name="record-modal-text" disabled>
+                                    &nbsp;
+                                </textarea>
+                            </td>
                         </tr>
                         <tr>
                             <td class="bold">JSON:</td>
-                            <td id="record-modal-json"></td>
+                            <td>
+                                <input type="text" id="record-modal-json" name="record-modal-json" disabled value=""/>
+                            </td>
                         </tr>
                         <tr>
                             <td class="bold">Boolean:</td>
-                            <td id="record-modal-boolean"></td>
+                            <td>
+                                <input type="text" id="record-modal-boolean" name="record-modal-boolean" disabled  value=""/>
+                            </td>
                         </tr>
                         <tr>
                             <td class="bold">Integer:</td>
-                            <td id="record-modal-integer"></td>
+                            <td>
+                                <input type="text" id="record-modal-integer" name="record-modal-integer" disabled value=""/>
+                            </td>
                         </tr>
                         <tr>
                             <td class="bold">Float:</td>
-                            <td id="record-modal-float"></td>
+                            <td>
+                                <input type="text" id="record-modal-float" name="record-modal-float" disabled value=""/>
+                            </td>
                         </tr>
                         </tbody>
                     </table>

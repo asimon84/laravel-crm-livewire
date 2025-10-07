@@ -41,13 +41,13 @@ new DataTable('#myDataTable', {
 new bootstrap.Modal(document.getElementById('recordModal'));
 
 $(document).on('click', '.view-record', function() {
-    $('#record-modal-id').html('');
-    $('#record-modal-string').html('');
+    $('#record-modal-id').val('');
+    $('#record-modal-string').val('');
     $('#record-modal-text').html('');
-    $('#record-modal-json').html('');
-    $('#record-modal-boolean').html('');
-    $('#record-modal-integer').html('');
-    $('#record-modal-float').html('');
+    $('#record-modal-json').val('');
+    $('#record-modal-boolean').val('');
+    $('#record-modal-integer').val('');
+    $('#record-modal-float').val('');
 
     $.ajax({
         url: '/record/'+$(this).data('id'),
@@ -55,13 +55,42 @@ $(document).on('click', '.view-record', function() {
         dataType: 'json',
         success: function(data) {
             // console.log('Data received:', data);
-            $('#record-modal-id').html(data.id);
-            $('#record-modal-string').html(data.string);
+            $('#record-modal-id').val(data.id);
+            $('#record-modal-string').val(data.string);
             $('#record-modal-text').html(data.text);
-            $('#record-modal-json').html(data.json);
-            $('#record-modal-boolean').html(data.boolean);
-            $('#record-modal-integer').html(data.integer);
-            $('#record-modal-float').html(data.float);
+            $('#record-modal-json').val(data.json);
+            $('#record-modal-boolean').val(data.boolean.toString());
+            $('#record-modal-integer').val(data.integer);
+            $('#record-modal-float').val(data.float);
+        },
+        error: function(jqXHR, textStatus, errorThrown) {
+            console.error('AJAX error:', textStatus, errorThrown);
+        }
+    });
+});
+
+$(document).on('click', '.edit-record', function() {
+    $('#record-modal-id').val('');
+    $('#record-modal-string').val('');
+    $('#record-modal-text').html('');
+    $('#record-modal-json').val('');
+    $('#record-modal-boolean').val('');
+    $('#record-modal-integer').val('');
+    $('#record-modal-float').val('');
+
+    $.ajax({
+        url: '/record/'+$(this).data('id'),
+        type: 'POST',
+        dataType: 'json',
+        success: function(data) {
+            // console.log('Data received:', data);
+            $('#record-modal-id').val(data.id);
+            $('#record-modal-string').val(data.string);
+            $('#record-modal-text').html(data.text);
+            $('#record-modal-json').val(data.json);
+            $('#record-modal-boolean').val(data.boolean.toString());
+            $('#record-modal-integer').val(data.integer);
+            $('#record-modal-float').val(data.float);
         },
         error: function(jqXHR, textStatus, errorThrown) {
             console.error('AJAX error:', textStatus, errorThrown);

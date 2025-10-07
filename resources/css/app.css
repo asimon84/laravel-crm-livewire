@@ -130,3 +130,9 @@ a:focus {
     padding: 10px;
     border: 1px solid grey;
 }
+
+#record-modal tbody tr td input,
+#record-modal tbody tr td textarea
+{
+    width: 100%;
+}
