@@ -4,7 +4,7 @@
             <div id="record-chart"></div>
         </div>
         <div class="relative h-full flex-1 overflow-hidden rounded-xl border border-neutral-200 dark:border-neutral-700">
-            <table id="myDataTable" class="table table-bordered stripe hover">
+            <table id="recordTable" class="table table-bordered stripe hover">
                 <thead>
                 <tr>
                     <th>ID</th>
@@ -83,6 +83,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" id="save-button">Save</button>
                 </div>
             </div>
         </div>

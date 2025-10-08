@@ -56,12 +56,12 @@ class RecordController extends Controller
     public function edit(Request $request, int $id):bool {
         $record = Record::find($id);
 
-        $record->string = 'Updated Post Title';
-        $record->text = 'This is the new content for the post.';
-        $record->json = '{}';
-        $record->boolean = 0;
-        $record->integer = 0;
-        $record->float = 0;
+        $record->string = $request->input('string');
+        $record->text = $request->input('text');
+        $record->json = $request->input('json');
+        $record->boolean = $request->input('boolean');
+        $record->integer = $request->input('integer');
+        $record->float = $request->input('float');
 
         return $record->save();
     }

@@ -22,7 +22,7 @@ var chart = c3.generate(
         }
     });
 
-new DataTable('#myDataTable', {
+new DataTable('#recordTable', {
     processing: true,
     serverSide: true,
     ajax: window.route,
@@ -49,7 +49,6 @@ $.callModal = function (id, disabled) {
     var modalInteger = $('#record-modal-integer');
     var modalFloat = $('#record-modal-float');
 
-    modalId.prop('disabled', disabled);
     modalString.prop('disabled', disabled);
     modalText.prop('disabled', disabled);
     modalJson.prop('disabled', disabled);
@@ -91,6 +90,30 @@ $.ajaxSetup({
     }
 });
 
+$.editRecord = function () {
+    $.ajax({
+        url: '/record/' + $('#record-modal-id').val(),
+        type: "POST",
+        dataType: 'json',
+        data: {
+            string: $('#record-modal-string').val(),
+            text: $('#record-modal-text').html(),
+            json: $('#record-modal-json').val(),
+            boolean: $('#record-modal-boolean').val(),
+            integer: $('#record-modal-integer').val(),
+            float: $('#record-modal-float').val()
+        },
+        success: function (data) {
+            // console.log('Data received:', data);
+            $('#recordModal').modal('hide');
+            $('#recordTable').DataTable().draw();
+        },
+        error: function (jqXHR, textStatus, errorThrown) {
+            console.error('AJAX error:', textStatus, errorThrown);
+        }
+    });
+};
+
 $.deleteRecord = function (id, table, tr) {
     $.ajax({
         url: '/record/' + id,
@@ -107,13 +130,19 @@ $.deleteRecord = function (id, table, tr) {
 };
 
 $(document).on('click', '.view-record', function () {
+    $('#save-button').hide();
     $.callModal($(this).data('id'), true);
 });
 
 $(document).on('click', '.edit-record', function () {
+    $('#save-button').show();
     $.callModal($(this).data('id'), false);
 });
 
+$(document).on('click', '#save-button', function () {
+    $.editRecord();
+});
+
 $(document).on('click', '.delete-record', function () {
-    $.deleteRecord($(this).data('id'), $('#myDataTable'), $(this).closest('tr'));
+    $.deleteRecord($(this).data('id'), $('#recordTable'), $(this).closest('tr'));
 });
