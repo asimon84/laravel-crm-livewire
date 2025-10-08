@@ -40,14 +40,6 @@ new DataTable('#myDataTable', {
 
 new bootstrap.Modal(document.getElementById('recordModal'));
 
-$(document).on('click', '.view-record', function () {
-    $.callModal($(this).data('id'), true);
-});
-
-$(document).on('click', '.edit-record', function () {
-    $.callModal($(this).data('id'), false);
-});
-
 $.callModal = function (id, disabled) {
     var modalId = $('#record-modal-id');
     var modalString = $('#record-modal-string');
@@ -92,3 +84,36 @@ $.callModal = function (id, disabled) {
         }
     });
 };
+
+$.ajaxSetup({
+    headers: {
+        'X-CSRF-TOKEN': $('input[name="_token"]').val()
+    }
+});
+
+$.deleteRecord = function (id, table, tr) {
+    $.ajax({
+        url: '/record/' + id,
+        type: "DELETE",
+        dataType: 'json',
+        success: function (data) {
+            // console.log('Data received:', data);
+            table.DataTable().row(tr).remove().draw();
+        },
+        error: function (jqXHR, textStatus, errorThrown) {
+            console.error('AJAX error:', textStatus, errorThrown);
+        }
+    });
+};
+
+$(document).on('click', '.view-record', function () {
+    $.callModal($(this).data('id'), true);
+});
+
+$(document).on('click', '.edit-record', function () {
+    $.callModal($(this).data('id'), false);
+});
+
+$(document).on('click', '.delete-record', function () {
+    $.deleteRecord($(this).data('id'), $('#myDataTable'), $(this).closest('tr'));
+});

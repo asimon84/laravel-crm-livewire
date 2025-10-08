@@ -88,6 +88,8 @@
         </div>
     </div>
 
+    @csrf
+
     <script>
         window.chartData = @json($chartData);
         window.route = "{{ route('chart-records') }}";
