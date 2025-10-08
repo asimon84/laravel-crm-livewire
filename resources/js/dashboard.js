@@ -40,60 +40,55 @@ new DataTable('#myDataTable', {
 
 new bootstrap.Modal(document.getElementById('recordModal'));
 
-$(document).on('click', '.view-record', function() {
-    $('#record-modal-id').val('');
-    $('#record-modal-string').val('');
-    $('#record-modal-text').html('');
-    $('#record-modal-json').val('');
-    $('#record-modal-boolean').val('');
-    $('#record-modal-integer').val('');
-    $('#record-modal-float').val('');
+$(document).on('click', '.view-record', function () {
+    $.callModal($(this).data('id'), true);
+});
+
+$(document).on('click', '.edit-record', function () {
+    $.callModal($(this).data('id'), false);
+});
+
+$.callModal = function (id, disabled) {
+    var modalId = $('#record-modal-id');
+    var modalString = $('#record-modal-string');
+    var modalText = $('#record-modal-text');
+    var modalJson = $('#record-modal-json');
+    var modalBoolean = $('#record-modal-boolean');
+    var modalInteger = $('#record-modal-integer');
+    var modalFloat = $('#record-modal-float');
+
+    modalId.prop('disabled', disabled);
+    modalString.prop('disabled', disabled);
+    modalText.prop('disabled', disabled);
+    modalJson.prop('disabled', disabled);
+    modalBoolean.prop('disabled', disabled);
+    modalInteger.prop('disabled', disabled);
+    modalFloat.prop('disabled', disabled);
+
+    modalId.val('');
+    modalString.val('');
+    modalText.html('');
+    modalJson.val('');
+    modalBoolean.val('');
+    modalInteger.val('');
+    modalFloat.val('');
 
     $.ajax({
-        url: '/record/'+$(this).data('id'),
-        type: 'GET',
+        url: '/record/' + id,
+        type: "GET",
         dataType: 'json',
-        success: function(data) {
+        success: function (data) {
             // console.log('Data received:', data);
-            $('#record-modal-id').val(data.id);
-            $('#record-modal-string').val(data.string);
-            $('#record-modal-text').html(data.text);
-            $('#record-modal-json').val(data.json);
-            $('#record-modal-boolean').val(data.boolean.toString());
-            $('#record-modal-integer').val(data.integer);
-            $('#record-modal-float').val(data.float);
+            modalId.val(data.id);
+            modalString.val(data.string);
+            modalText.html(data.text);
+            modalJson.val(data.json);
+            modalBoolean.val(data.boolean.toString());
+            modalInteger.val(data.integer);
+            modalFloat.val(data.float);
         },
-        error: function(jqXHR, textStatus, errorThrown) {
+        error: function (jqXHR, textStatus, errorThrown) {
             console.error('AJAX error:', textStatus, errorThrown);
         }
     });
-});
-
-$(document).on('click', '.edit-record', function() {
-    $('#record-modal-id').val('');
-    $('#record-modal-string').val('');
-    $('#record-modal-text').html('');
-    $('#record-modal-json').val('');
-    $('#record-modal-boolean').val('');
-    $('#record-modal-integer').val('');
-    $('#record-modal-float').val('');
-
-    $.ajax({
-        url: '/record/'+$(this).data('id'),
-        type: 'POST',
-        dataType: 'json',
-        success: function(data) {
-            // console.log('Data received:', data);
-            $('#record-modal-id').val(data.id);
-            $('#record-modal-string').val(data.string);
-            $('#record-modal-text').html(data.text);
-            $('#record-modal-json').val(data.json);
-            $('#record-modal-boolean').val(data.boolean.toString());
-            $('#record-modal-integer').val(data.integer);
-            $('#record-modal-float').val(data.float);
-        },
-        error: function(jqXHR, textStatus, errorThrown) {
-            console.error('AJAX error:', textStatus, errorThrown);
-        }
-    });
-});
+};
