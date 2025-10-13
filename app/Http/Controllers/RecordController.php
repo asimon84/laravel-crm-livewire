@@ -59,9 +59,9 @@ class RecordController extends Controller
         $record->string = $request->input('string');
         $record->text = $request->input('text');
         $record->json = $request->input('json');
-        $record->boolean = $request->input('boolean');
-        $record->integer = $request->input('integer');
-        $record->float = $request->input('float');
+        $record->boolean = filter_var($request->input('boolean'), FILTER_VALIDATE_BOOLEAN);
+        $record->integer = (int) $request->input('integer');
+        $record->float = (float) $request->input('float');
 
         return $record->save();
     }
