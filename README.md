@@ -16,6 +16,8 @@ Rename the file ".env.example" to ".env"
 
 composer install
 
+npm install
+
 npm run build
 
 npm run dev
