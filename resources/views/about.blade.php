@@ -10,7 +10,7 @@
                 </h2>
                 <div id="collapseOne" class="accordion-collapse collapse show" data-bs-parent="#accordionExample">
                     <div class="accordion-body">
-                        This is a sample CRM application built with a React frontend.
+                        This is a sample CRM application built with a Blade and Livewire frontend.
                     </div>
                 </div>
             </div>
@@ -34,7 +34,7 @@
                 </h2>
                 <div id="collapseThree" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
                     <div class="accordion-body">
-                        This application demonstrates Blade front end capabilities and componentization of reusable elements.
+                        This application demonstrates Blade and Livewire front end capabilities and componentization of reusable elements.
                     </div>
                 </div>
             </div>
