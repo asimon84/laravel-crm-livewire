@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AboutController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\RecordController;
 use Illuminate\Support\Facades\Route;
@@ -16,6 +17,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/record/{id}', [RecordController::class, 'show'])->name('modal-record.show');
     Route::post('/record/{id}', [RecordController::class, 'edit'])->name('modal-record.edit');
     Route::delete('/record/{id}', [RecordController::class, 'delete'])->name('modal-record.delete');
+
+    Route::get('/about', [AboutController::class, 'index'])->name('about');
 });
 
 Route::middleware(['auth'])->group(function () {
