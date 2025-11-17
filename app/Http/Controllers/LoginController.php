@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\View\View;
 
 class LoginController extends Controller
 {
@@ -11,9 +12,9 @@ class LoginController extends Controller
      *
      * @param Request $request
      *
-     * @return \Illuminate\Contracts\View\View
+     * @return View
      */
-    public function index(Request $request) {
+    public function index(Request $request):View {
         return view('login', []);
     }
 }

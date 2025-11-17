@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Record;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Yajra\DataTables\DataTables;
 
@@ -13,9 +14,9 @@ class RecordController extends Controller
      *
      * @param Request $request
      *
-     * @return \Illuminate\Http\JsonResponse
+     * @return JsonResponse
      */
-    public function index(Request $request) {
+    public function index(Request $request):JsonResponse {
         return DataTables::of(Record::all())
             ->addIndexColumn()
             ->addColumn('action', function($row){
