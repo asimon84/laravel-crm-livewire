@@ -2,16 +2,18 @@
 
 use App\Http\Controllers\AboutController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\LoginController;
 use App\Http\Controllers\RecordController;
 use Illuminate\Support\Facades\Route;
 use Laravel\Fortify\Features;
 use Livewire\Volt\Volt;
 
-Route::get('/', function () {
-    return view('welcome');
-})->name('home');
+Route::middleware('guest')->group(function () {
+    Route::get('/', [LoginController::class, 'index'])->name('guestHome');
+});
 
 Route::middleware(['auth', 'verified'])->group(function () {
+    Route::get('/', [DashboardController::class, 'index'])->name('home');
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
     Route::get('/records', [RecordController::class, 'index'])->name('chart-records');
     Route::get('/record/{id}', [RecordController::class, 'show'])->name('modal-record.show');
